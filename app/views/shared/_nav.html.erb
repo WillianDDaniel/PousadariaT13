@@ -8,14 +8,14 @@
       <ul class="navbar-nav me-auto mb-2 mb-lg-0">
         <li class="nav-item nav-link"><%= link_to 'Gestão de Pousadas', inn_management_path, class: 'navbar-link' %></li>
         <% if inn_owner_signed_in? %>
+         <li><%= link_to 'Lista de Favoritos', favorite_lists_path %></li>
          <li class="nav-item dropdown">
           <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
             <%= current_inn_owner.email %>
           </a>
           <ul class="dropdown-menu">
             <li><a class="dropdown-item" href="#">Meu Perfil</a></li>
-            <li><hr class="dropdown-divider"></li>
-            
+            <li><hr class="dropdown-divider"></li>            
             <li><%= button_to 'Sair', destroy_inn_owner_session_path, { method: :delete,  class: 'dropdown-item', form: { "data-turbo": false } } %></li>
           </ul>
         </li>

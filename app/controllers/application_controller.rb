@@ -12,4 +12,8 @@ class ApplicationController < ActionController::Base
     return if request.controller_class.eql? InnDashboard::InnsController
     redirect_to edit_inn_dashboard_inns_path unless current_inn_owner.inn.valid?
   end
+
+  def owner_active
+    current_inn_owner if inn_owner_signed_in?
+  end
 end

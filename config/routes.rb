@@ -10,6 +10,8 @@ Rails.application.routes.draw do
   root "home#index"
   resources :inns, only: [:show]
 
+  resources :favorite_lists, only: %i[index]
+
   resource :inn_management, only: [:show]
 
   namespace :inn_dashboard do
