@@ -7,8 +7,8 @@
     <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
       <ul class="navbar-nav me-auto mb-2 mb-lg-0">
         <li class="nav-item nav-link"><%= link_to 'Gestão de Pousadas', inn_management_path, class: 'navbar-link' %></li>
+        <li class="nav-item nav-link"><%= link_to 'Reservar pousada', inn_user_path, class: 'navbar-link' %></li>
         <% if inn_owner_signed_in? %>
-         <li><%= link_to 'Lista de Favoritos', favorite_lists_path %></li>
          <li class="nav-item dropdown">
           <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
             <%= current_inn_owner.email %>
@@ -19,6 +19,13 @@
             <li><%= button_to 'Sair', destroy_inn_owner_session_path, { method: :delete,  class: 'dropdown-item', form: { "data-turbo": false } } %></li>
           </ul>
         </li>
+        <% end %>
+          <li class="nav-item dropdown">
+        <% if inn_user_signed_in? %>
+          <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+            <%= current_inn_user.email %>
+          </a>
+          <li><%= link_to 'Lista de Favoritos', favorite_lists_path %></li>
         <% end %>
       </ul>
     </div>

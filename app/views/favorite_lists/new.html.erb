@@ -1,0 +1,5 @@
+<%= form_with(model: @favorite_list) do |f| %>
+    <%= f.label :name, 'Nome da lista' %>
+    <%= f.text_field :name %>
+    <%= f.submit 'Criar Lista' %> 
+<% end %> 

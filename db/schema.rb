@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.1].define(version: 2025_01_07_212955) do
+ActiveRecord::Schema[7.1].define(version: 2025_01_08_193015) do
   create_table "active_storage_attachments", force: :cascade do |t|
     t.string "name", null: false
     t.string "record_type", null: false
@@ -52,12 +52,21 @@ ActiveRecord::Schema[7.1].define(version: 2025_01_07_212955) do
     t.index ["inn_id"], name: "index_addresses_on_inn_id"
   end
 
-  create_table "favorite_lists", force: :cascade do |t|
-    t.string "name"
-    t.integer "inn_owner_id", null: false
+  create_table "favorite_list_inns", force: :cascade do |t|
+    t.integer "favorite_list_id", null: false
+    t.integer "inn_id", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.index ["inn_owner_id"], name: "index_favorite_lists_on_inn_owner_id"
+    t.index ["favorite_list_id"], name: "index_favorite_list_inns_on_favorite_list_id"
+    t.index ["inn_id"], name: "index_favorite_list_inns_on_inn_id"
+  end
+
+  create_table "favorite_lists", force: :cascade do |t|
+    t.string "name"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.integer "inn_user_id"
+    t.index ["inn_user_id"], name: "index_favorite_lists_on_inn_user_id"
   end
 
   create_table "inn_owners", force: :cascade do |t|
@@ -87,6 +96,19 @@ ActiveRecord::Schema[7.1].define(version: 2025_01_07_212955) do
     t.index ["inn_id"], name: "index_inn_rooms_on_inn_id"
   end
 
+  create_table "inn_users", force: :cascade do |t|
+    t.string "email", default: "", null: false
+    t.string "encrypted_password", default: "", null: false
+    t.string "reset_password_token"
+    t.datetime "reset_password_sent_at"
+    t.datetime "remember_created_at"
+    t.string "name"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["email"], name: "index_inn_users_on_email", unique: true
+    t.index ["reset_password_token"], name: "index_inn_users_on_reset_password_token", unique: true
+  end
+
   create_table "inns", force: :cascade do |t|
     t.string "name"
     t.datetime "created_at", null: false
@@ -102,7 +124,9 @@ ActiveRecord::Schema[7.1].define(version: 2025_01_07_212955) do
   add_foreign_key "active_storage_attachments", "active_storage_blobs", column: "blob_id"
   add_foreign_key "active_storage_variant_records", "active_storage_blobs", column: "blob_id"
   add_foreign_key "addresses", "inns"
-  add_foreign_key "favorite_lists", "inn_owners"
+  add_foreign_key "favorite_list_inns", "favorite_lists"
+  add_foreign_key "favorite_list_inns", "inns"
+  add_foreign_key "favorite_lists", "inn_users"
   add_foreign_key "inn_rooms", "inns"
   add_foreign_key "inns", "inn_owners"
 end

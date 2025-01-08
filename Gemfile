@@ -47,6 +47,7 @@ group :development, :test do
   gem "rspec-rails"
   gem "capybara"
   gem "debug", platforms: %i[ mri windows ]
+  gem 'shoulda-matchers', '~> 6.0'
 end
 
 group :test do

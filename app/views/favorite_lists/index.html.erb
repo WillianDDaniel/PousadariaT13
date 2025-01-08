@@ -1,5 +1,8 @@
+<%= link_to 'Nova lista', new_favorite_list_path %>
+
+
 <% @favorite_lists.each do |favorite_list| %>
   <div>
-    <%= favorite_list.name %>
+    <%= link_to favorite_list.name, favorite_list %>
   </div>
 <% end %>

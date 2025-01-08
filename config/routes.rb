@@ -1,4 +1,8 @@
 Rails.application.routes.draw do
+  devise_for :inn_users, controllers: {
+        sessions: 'inn_users/sessions',
+        registrations: 'inn_users/registrations'
+      }
   devise_for :inn_owners
   # Define your application routes per the DSL in https://guides.rubyonrails.org/routing.html
 
@@ -8,9 +12,15 @@ Rails.application.routes.draw do
 
   # Defines the root path route ("/")
   root "home#index"
-  resources :inns, only: [:show]
+  resources :inns, only: [:show] do
+    resources :favorite_list_inns, only: [:create]
+  end
 
-  resources :favorite_lists, only: %i[index]
+  resources :favorite_list_inns, only: %i[destroy]
+
+  resources :favorite_lists, only: %i[index new create show]
+
+  get "inn_user", to: "home#inn_user", as: "inn_user"
 
   resource :inn_management, only: [:show]
 

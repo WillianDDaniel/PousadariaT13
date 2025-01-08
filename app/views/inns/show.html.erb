@@ -19,4 +19,19 @@
     </div>
   <% end %>
   </div>
+
+  <div>
+    <% if inn_user_signed_in? %>
+      <%= form_with(model: [@inn, @favorite_list_inn]) do |f| %>
+      <div>
+        <%= f.label :favorite_list_id, 'Listas' %>
+        <%= f.collection_select :favorite_list_id, @favorite_lists, :id, :name, { include_blank: 'Selecione uma pousada' } %>
+      </div>
+
+      <%= f.submit 'Adicionar Favorito'%>
+
+      
+      <% end %>
+    <% end %>
+  </div>
 </section>

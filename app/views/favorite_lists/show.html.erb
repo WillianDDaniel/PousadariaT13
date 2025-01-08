@@ -1,0 +1,11 @@
+<h1>Detalhes da lista <%= @favorite_list.name  %></h1>
+
+<% @favorite_list.inns.each do |inn| %>
+  <div>
+    <%= inn.name %>
+  </div>
+  <div>
+    <%= button_to 'Deletar', favorite_list_inn_path(@favorite_list.favorite_list_inns.find_by(inn: inn)),
+     id: dom_id(inn), method: :delete %>
+  </div>
+<% end %>
