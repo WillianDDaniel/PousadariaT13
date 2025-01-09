@@ -48,6 +48,8 @@ group :development, :test do
   gem "capybara"
   gem "debug", platforms: %i[ mri windows ]
   gem 'shoulda-matchers', '~> 6.0'
+  gem 'factory_bot_rails'
+  gem 'faker'
 end
 
 group :test do
